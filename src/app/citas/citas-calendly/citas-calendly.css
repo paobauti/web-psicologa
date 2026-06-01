@@ -1,0 +1,35 @@
+.citas-calendly {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  border: 1px solid #f0e0d6;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.calendly-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #5c3d2e;
+  font-size: 15px;
+}
+
+.calendly-widget {
+  border: 1.5px dashed #e8a898;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendly-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #2e7d32;
+}

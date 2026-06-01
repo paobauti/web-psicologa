@@ -1,0 +1,39 @@
+.page-hero {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background-color: #fff8f5;
+  height: 200px;
+  overflow: hidden;
+}
+
+.page-hero-text {
+  padding: 40px 60px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.page-hero-text h1 {
+  font-size: 36px;
+  color: #5c3d2e;
+}
+
+.page-hero-text p {
+  font-size: 13px;
+  color: #a0856e;
+  line-height: 1.7;
+}
+
+.page-hero-image {
+  width: 50%;
+  overflow: hidden;
+}
+
+.page-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

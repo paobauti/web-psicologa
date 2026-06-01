@@ -1,0 +1,37 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 25px 80px;
+  background-color: #fdf0eb;
+  margin: 0 80px 40px 80px;
+  border-radius: 12px;
+}
+
+.banner-icon span {
+  font-size: 30px;
+}
+
+.banner p {
+  font-size: 13px;
+  color: #a0856e;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.btn-informar {
+  background-color: transparent;
+  color: #c4956a;
+  border: 1px solid #c4956a;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Playfair Display', serif;
+  white-space: nowrap;
+}
+
+.btn-informar:hover {
+  background-color: #f0e0d6;
+}

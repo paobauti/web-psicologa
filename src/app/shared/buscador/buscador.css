@@ -1,0 +1,44 @@
+.buscador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px 80px;
+  background-color: #fff8f5;
+}
+
+.buscador-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #f0e0d6;
+  border-radius: 25px;
+  padding: 10px 20px;
+  width: 400px;
+  background-color: white;
+}
+
+.buscador-input input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #a0856e;
+  font-family: 'Playfair Display', serif;
+  width: 100%;
+}
+
+.btn-filtrar {
+  background-color: white;
+  color: #c4956a;
+  border: 1px solid #c4956a;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+}
+
+.btn-filtrar:hover {
+  background-color: #fdf0eb;
+}

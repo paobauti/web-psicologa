@@ -1,0 +1,17 @@
+.sobre-mi {
+  display: flex;
+  gap: 40px;
+  padding: 60px 80px;
+  background-color: #fff8f5;
+}
+
+.sobre-left {
+  flex: 2;
+}
+
+.sobre-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}

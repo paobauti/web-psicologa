@@ -1,0 +1,7 @@
+.citas-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px 80px;
+  background-color: #fff8f5;
+}

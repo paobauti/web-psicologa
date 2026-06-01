@@ -1,0 +1,59 @@
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 20px 80px 40px 80px;
+  background-color: #fff8f5;
+}
+
+.articulo-card {
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #f0e0d6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+.articulo-imagen {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.articulo-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.categoria {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.fe { background-color: #c4956a; }
+.salud { background-color: #e8a898; }
+.bienestar { background-color: #a0856e; }
+.crecimiento { background-color: #d4917f; }
+
+.articulo-card h3 {
+  font-size: 14px;
+  color: #5c3d2e;
+  padding: 0 15px;
+  line-height: 1.4;
+}
+
+.articulo-card p {
+  font-size: 12px;
+  color: #a0856e;
+  padding: 0 15px;
+  line-height: 1.6;
+}

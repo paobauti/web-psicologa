@@ -1,0 +1,44 @@
+.recursos-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 40px;
+  background-color: #fdf0eb;
+  border-radius: 12px;
+  margin: 40px 80px 40px 80px;
+  gap: 20px;
+}
+
+.banner-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+}
+
+.banner-titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #5c3d2e;
+}
+
+.banner-texto p {
+  font-size: 13px;
+  color: #a0856e;
+}
+
+.btn-banner {
+  background-color: #e8a898;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Playfair Display', serif;
+  white-space: nowrap;
+}
+
+.btn-banner:hover {
+  background-color: #d4917f;
+}

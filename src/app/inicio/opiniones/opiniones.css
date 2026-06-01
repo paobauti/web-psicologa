@@ -1,0 +1,41 @@
+.opiniones {
+  padding: 60px 80px;
+  background-color: #fff8f5;
+  text-align: center;
+}
+
+.opiniones h2 {
+  font-size: 28px;
+  color: #c4956a;
+  margin-bottom: 40px;
+}
+
+.opiniones-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.opinion-card {
+  background-color: white;
+  border: 1px solid #f0e0d6;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 280px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.opinion-texto {
+  font-size: 13px;
+  color: #a0856e;
+  line-height: 1.7;
+}
+
+.opinion-autor {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c4956a;
+}

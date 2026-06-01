@@ -1,0 +1,69 @@
+.sobre-info {
+  display: flex;
+  gap: 30px;
+}
+
+.sobre-foto {
+  width: 220px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #f0e0d6;
+}
+
+.sobre-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sobre-texto h1 {
+  font-size: 32px;
+  color: #5c3d2e;
+}
+
+.sobre-texto h2 {
+  font-size: 20px;
+  color: #c4956a;
+}
+
+.sobre-titulo {
+  font-weight: 600;
+  color: #5c3d2e;
+  font-size: 14px;
+}
+
+.sobre-texto p {
+  font-size: 13px;
+  color: #a0856e;
+  line-height: 1.7;
+}
+
+.especialidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.especialidad-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 80px;
+  gap: 5px;
+}
+
+.especialidad-item span {
+  font-size: 28px;
+}
+
+.especialidad-item p {
+  font-size: 11px;
+  color: #a0856e;
+}
+
+.telehealth {
+  font-style: italic;
+}
