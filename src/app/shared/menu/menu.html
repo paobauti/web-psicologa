@@ -13,8 +13,17 @@
     <li><a routerLink="/servicios">Servicios</a></li>
     <li><a routerLink="/grupos">Grupos</a></li>
     <li><a routerLink="/recursos">Recursos</a></li>
-    <li><a routerLink="/contacto">Contacto</a></li>
   </ul>
 
-  <button class="btn-cita" routerLink="/citas">Agendar Cita</button>
+  <div class="navbar-actions">
+    <div class="usuario-menu" *ngIf="usuarioNombre">
+      <span class="usuario-nombre">👤 {{ usuarioNombre }}</span>
+      <div class="dropdown">
+        <a routerLink="/perfil">Mi Perfil</a>
+        <a (click)="cerrarSesion()">Cerrar Sesión</a>
+      </div>
+    </div>
+    <button class="btn-cita" routerLink="/citas">Agendar Cita</button>
+    <button class="btn-login" *ngIf="!usuarioNombre" routerLink="/login">Iniciar Sesión</button>
+  </div>
 </nav>

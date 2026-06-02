@@ -1,0 +1,50 @@
+<section class="login-section">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="assets/logo.png" alt="Logo">
+      <div>
+        <span class="logo-name">Daisy Peralta</span>
+        <span class="logo-sub">Catholic Psychotherapist & Life Coach</span>
+      </div>
+    </div>
+
+    <div class="login-tabs">
+      <button class="tab" [class.activo]="!esRegistro" (click)="esRegistro = false">Iniciar Sesión</button>
+      <button class="tab" [class.activo]="esRegistro" (click)="esRegistro = true">Registrarse</button>
+    </div>
+
+    <div *ngIf="!esRegistro">
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" placeholder="correo@ejemplo.com" class="form-input" [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" placeholder="••••••••" class="form-input" [(ngModel)]="password">
+      </div>
+      <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <button class="btn-login" (click)="login()">Iniciar Sesión</button>
+    </div>
+
+    <div *ngIf="esRegistro">
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Tu nombre" class="form-input" [(ngModel)]="nombre">
+      </div>
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" placeholder="correo@ejemplo.com" class="form-input" [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp</label>
+        <input type="tel" placeholder="(000) 000-0000" class="form-input" [(ngModel)]="telefono">
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" placeholder="••••••••" class="form-input" [(ngModel)]="password">
+      </div>
+      <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <button class="btn-login" (click)="registro()">Crear Cuenta</button>
+    </div>
+  </div>
+</section><p>login works!</p>

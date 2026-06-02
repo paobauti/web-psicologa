@@ -1,0 +1,52 @@
+<section class="perfil">
+  <div class="perfil-header">
+    <div class="perfil-avatar">{{ iniciales }}</div>
+    <div>
+      <h1>{{ nombre }}</h1>
+      <p>{{ email }}</p>
+    </div>
+  </div>
+
+  <div class="perfil-content">
+    <div class="perfil-section">
+      <h2>Mis Citas</h2>
+      <div class="citas-lista">
+        <div class="cita-card" *ngFor="let cita of citas">
+          <div class="cita-info">
+            <p class="cita-tipo">{{ cita.tipo }}</p>
+            <p class="cita-fecha">📅 {{ cita.fecha }} — {{ cita.hora }}</p>
+            <p class="cita-temas">{{ cita.temas }}</p>
+          </div>
+          <span class="cita-estado" [class]="cita.estado">{{ cita.estado }}</span>
+        </div>
+        <div class="empty" *ngIf="citas.length === 0">
+          <p>No tienes citas agendadas</p>
+          <a routerLink="/citas" class="btn-agendar">Agendar Cita</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="perfil-section">
+      <h2>Mis Mensajes</h2>
+      <div class="mensajes-lista">
+        <div class="mensaje-card" *ngFor="let mensaje of mensajes">
+          <p class="mensaje-texto">{{ mensaje.mensaje }}</p>
+          <p class="mensaje-fecha">{{ mensaje.fecha }}</p>
+          <div class="mensaje-respuesta" *ngIf="mensaje.respuesta">
+            <p class="respuesta-label">Respuesta de Daisy:</p>
+            <p>{{ mensaje.respuesta }}</p>
+          </div>
+        </div>
+        <div class="empty" *ngIf="mensajes.length === 0">
+          <p>No tienes mensajes</p>
+        </div>
+      </div>
+
+      <div class="nuevo-mensaje">
+        <h3>Enviar mensaje</h3>
+        <textarea placeholder="Escribe tu mensaje..." class="mensaje-input" [(ngModel)]="nuevoMensaje"></textarea>
+        <button class="btn-enviar" (click)="enviarMensaje()">Enviar Mensaje</button>
+      </div>
+    </div>
+  </div>
+</section>

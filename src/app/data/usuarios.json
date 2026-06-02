@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Jessica Martínez",
+    "email": "jessica@gmail.com",
+    "password": "jessica123",
+    "telefono": "6561234567"
+  },
+  {
+    "id": 2,
+    "nombre": "Francisco López",
+    "email": "francisco@gmail.com",
+    "password": "francisco123",
+    "telefono": "6569876543"
+  },
+  {
+    "id": 3,
+    "nombre": "Mauricio Castañeda",
+    "email": "mauricio@gmail.com",
+    "password": "mauricio123",
+    "telefono": "6567654321"
+  }
+]

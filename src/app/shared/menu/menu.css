@@ -50,6 +50,12 @@
   font-weight: 600;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .btn-cita {
   background-color: #e8a898;
   color: white;
@@ -58,8 +64,71 @@
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
+  font-family: 'Playfair Display', serif;
 }
 
 .btn-cita:hover {
   background-color: #d4917f;
+}
+
+.btn-login {
+  background-color: transparent;
+  color: #c4956a;
+  border: 1px solid #c4956a;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-login:hover {
+  background-color: #fdf0eb;
+}
+.usuario-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.usuario-nombre {
+  font-size: 13px;
+  color: #c4956a;
+  padding: 8px 12px;
+  border: 1px solid #f0e0d6;
+  border-radius: 20px;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 35px;
+  background: white;
+  border: 1px solid #f0e0d6;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 150px;
+  z-index: 100;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.usuario-menu:hover .dropdown,
+.dropdown:hover {
+  display: flex;
+}
+
+.dropdown a {
+  font-size: 13px;
+  color: #a0856e;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #fdf0eb;
+  color: #5c3d2e;
 }
