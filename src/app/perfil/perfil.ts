@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { DataService } from '../services/data';
+import { SupabaseService } from '../services/supabase';
 
 @Component({
   selector: 'app-perfil',
@@ -17,23 +17,38 @@ export class Perfil implements OnInit {
   citas: any[] = [];
   mensajes: any[] = [];
   nuevoMensaje = '';
+  cargando = true;
 
-  constructor(private dataService: DataService) {}
+  constructor(private supabase: SupabaseService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.nombre = localStorage.getItem('usuarioNombre') || 'Usuario';
     this.email = localStorage.getItem('usuarioEmail') || '';
     this.iniciales = this.nombre.split(' ').map(n => n[0]).join('').toUpperCase();
 
-    const usuarioId = parseInt(localStorage.getItem('usuarioId') || '1');
-    this.citas = this.dataService.getCitasByUsuario(usuarioId);
-    this.mensajes = this.dataService.getMensajesByUsuario(usuarioId);
+    const usuarioId = localStorage.getItem('usuarioId') || '';
+
+    if (usuarioId) {
+      const { data: citas } = await this.supabase.getCitasByUsuario(usuarioId);
+      if (citas) this.citas = citas;
+
+      const { data: mensajes } = await this.supabase.getMensajesByUsuario(usuarioId);
+      if (mensajes) this.mensajes = mensajes;
+    }
+
+    this.cargando = false;
   }
 
-  enviarMensaje() {
+  async enviarMensaje() {
     if (this.nuevoMensaje) {
-      alert('Mensaje enviado correctamente');
-      this.nuevoMensaje = '';
+      const usuarioId = localStorage.getItem('usuarioId') || '';
+      const { error } = await this.supabase.enviarMensaje(usuarioId, this.nuevoMensaje);
+      if (!error) {
+        alert('¡Mensaje enviado correctamente!');
+        this.nuevoMensaje = '';
+        const { data } = await this.supabase.getMensajesByUsuario(usuarioId);
+        if (data) this.mensajes = data;
+      }
     }
   }
 }

@@ -1,10 +1,57 @@
 <app-page-hero
   titulo="Citas"
   descripcion="Agenda tu cita para brindarte el apoyo que necesitas."
-  imagen="assets/citas.jpg">
+  imagen="https://nxgkvvykypfntdmgwhsl.supabase.co/storage/v1/object/sign/Imagenes/img_citas.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV80NjdlNGRiNS03MjFhLTRjZDgtYWM1Ny0wNjE0ZDI0YzQzNjEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJJbWFnZW5lcy9pbWdfY2l0YXMucG5nIiwiaWF0IjoxNzgwNTU0NjY4LCJleHAiOjE4MTIwOTA2Njh9.fPWi9ikL1s_hk6p35MpcSkxDDWGz7oQ4OomcbRfpZ9A">
 </app-page-hero>
 
-<section class="citas-content">
-  <app-citas-calendly></app-citas-calendly>
-  <app-citas-form></app-citas-form>
-</section>
+<div class="citas-content">
+  <div class="calendario-card">
+    <h3>Selecciona una fecha:</h3>
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+    <div class="horarios" *ngIf="fechaSeleccionada">
+      <h3>Selecciona un horario disponible:</h3>
+
+      <p class="cargando-msg" *ngIf="cargandoHorarios">Cargando horarios...</p>
+
+      <select class="form-input" [(ngModel)]="horarioSeleccionado" *ngIf="!cargandoHorarios">
+        <option value="">Selecciona un horario</option>
+        <option
+          *ngFor="let horario of horarios"
+          [value]="horario.hora"
+          [disabled]="estaOcupado(horario.hora)">
+          {{ horario.hora | slice:0:5 }}{{ estaOcupado(horario.hora) ? ' — Ocupado' : '' }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3>Datos Personales</h3>
+    <div class="form-group">
+      <input type="text" placeholder="Nombre y Apellidos" class="form-input" [(ngModel)]="nombre">
+    </div>
+    <div class="form-group">
+      <input type="email" placeholder="Correo Electrónico" class="form-input" [(ngModel)]="email">
+    </div>
+    <div class="form-group">
+      <input type="tel" placeholder="Teléfono / WhatsApp" class="form-input" [(ngModel)]="telefono">
+    </div>
+    <div class="form-group">
+      <select class="form-input" [(ngModel)]="tipoSesion">
+        <option value="">Tipo de Sesión</option>
+        <option value="Life Coach">Life Coach</option>
+        <option value="Terapia Individual" disabled>Terapia Individual (Próximamente)</option>
+        <option value="Terapia de Pareja" disabled>Terapia de Pareja (Próximamente)</option>
+        <option value="Terapia Familiar" disabled>Terapia Familiar (Próximamente)</option>
+        <option value="Terapia de Grupo" disabled>Terapia de Grupo (Próximamente)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <textarea placeholder="Temas a tratar..." class="form-textarea" [(ngModel)]="temas"></textarea>
+    </div>
+    <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+    <p class="exito-msg" *ngIf="exitoMsg">{{ exitoMsg }}</p>
+    <button class="btn-agendar" (click)="agendarCita()">Agendar Cita</button>
+  </div>
+</div>

@@ -131,3 +131,21 @@
   font-size: 13px;
   font-family: 'Playfair Display', serif;
 }
+.life-coach-info h2 i {
+  color: #c4956a;
+  font-size: 20px;
+}
+
+.feature i {
+  font-size: 28px;
+  color: #c4956a;
+}
+
+.modalidad i {
+  color: #c4956a;
+}
+
+.detail-item i {
+  font-size: 20px;
+  color: #c4956a;
+}

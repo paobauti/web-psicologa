@@ -25,3 +25,8 @@
   color: #a0856e;
   line-height: 1.4;
 }
+
+.feature-item i {
+  font-size: 20px;
+  color: #c4956a;
+}

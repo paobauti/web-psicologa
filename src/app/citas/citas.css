@@ -5,3 +5,141 @@
   padding: 40px 80px;
   background-color: #fff8f5;
 }
+
+.calendario-card, .form-card {
+  background: white;
+  border: 1px solid #f0e0d6;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 500px;
+}
+
+.calendario-card h3, .form-card h3 {
+  font-size: 16px;
+  color: #c4956a;
+}
+
+.horarios h3 {
+  font-size: 14px;
+  color: #5c3d2e;
+  margin-bottom: 10px;
+}
+
+.horarios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.btn-horario {
+  border: 1px solid #f0e0d6;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+  color: #a0856e;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-horario:hover {
+  background-color: #fdf0eb;
+  border-color: #c4956a;
+}
+
+.btn-horario.seleccionado {
+  background-color: #e8a898;
+  color: white;
+  border-color: #e8a898;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-input {
+  border: 1px solid #f0e0d6;
+  border-radius: 25px;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: #a0856e;
+  font-family: 'Playfair Display', serif;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #c4956a;
+}
+
+.form-textarea {
+  border: 1px solid #f0e0d6;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: #a0856e;
+  font-family: 'Playfair Display', serif;
+  outline: none;
+  height: 100px;
+  resize: none;
+}
+
+.error-msg {
+  color: #c62828;
+  font-size: 12px;
+}
+
+.exito-msg {
+  color: #2e7d32;
+  font-size: 12px;
+}
+
+.btn-agendar {
+  background-color: #e8a898;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-agendar:hover {
+  background-color: #d4917f;
+}
+
+:host ::ng-deep .fc {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  width: 100%;
+}
+
+:host ::ng-deep .fc-toolbar-title {
+  font-size: 16px;
+  color: #c4956a;
+}
+
+:host ::ng-deep .fc-button {
+  background-color: #e8a898 !important;
+  border-color: #e8a898 !important;
+  font-size: 12px !important;
+}
+
+:host ::ng-deep .fc-daygrid-day-number {
+  color: #5c3d2e;
+  font-size: 13px;
+}
+
+:host ::ng-deep .fc-col-header-cell-cushion {
+  color: #a0856e;
+  font-size: 12px;
+}
+
+:host ::ng-deep .fc-daygrid-day.fc-day-today {
+  background-color: #fdf0eb !important;
+}

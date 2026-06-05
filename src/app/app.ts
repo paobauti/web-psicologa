@@ -5,11 +5,12 @@ import { Menu } from './shared/menu/menu';
 import { Footer } from './shared/footer/footer';
 import { Hero } from './inicio/hero/hero';
 import { Features } from './inicio/features/features';
-import { Opiniones } from './inicio/opiniones/opiniones';
+import { NuevosEspacios } from './servicios/nuevos-espacios/nuevos-espacios';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgIf, Menu, Footer, Hero, Features, Opiniones],
+  imports: [RouterOutlet, NgIf, Menu, Footer, Hero, Features,NuevosEspacios],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

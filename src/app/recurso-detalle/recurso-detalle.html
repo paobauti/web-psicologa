@@ -1,0 +1,60 @@
+<div class="detalle-wrapper" *ngIf="!cargando && recurso">
+
+  <!-- Hero con imagen -->
+  <div class="detalle-hero">
+    <div class="detalle-hero-imagen">
+      <img [src]="recurso.imagen_url || 'https://placehold.co/600x400'" [alt]="recurso.titulo">
+    </div>
+    <div class="detalle-hero-info">
+      <span class="categoria-badge">{{ recurso.categoria }}</span>
+      <h1>{{ recurso.titulo }}</h1>
+
+      <!-- Puntos destacados -->
+      <div class="puntos-card" *ngIf="recurso.puntos && recurso.puntos.length > 0">
+        <p class="puntos-titulo">En este artículo encontrarás:</p>
+        <ul>
+          <li *ngFor="let punto of recurso.puntos">{{ punto }}</li>
+        </ul>
+        <span class="puntos-icono">🌿</span>
+      </div>
+
+      <!-- Descarga PDF -->
+      <div class="pdf-section" *ngIf="recurso.pdf_url">
+        <p class="pdf-titulo">Descarga este recurso</p>
+        <div class="pdf-card">
+          <div class="pdf-info">
+            <span class="pdf-icon">PDF</span>
+            <span class="pdf-nombre">{{ recurso.titulo }}</span>
+          </div>
+          <button class="btn-descargar" (click)="descargarPdf()">Descargar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Descripción -->
+  <div class="detalle-descripcion">
+    <h2>Descripción</h2>
+    <p>{{ recurso.descripcion }}</p>
+    <div *ngIf="recurso.contenido" class="detalle-contenido">
+      <p>{{ recurso.contenido }}</p>
+    </div>
+  </div>
+
+  <!-- Volver -->
+  <div class="detalle-volver">
+    <a routerLink="/recursos" class="btn-volver">← Volver a recursos</a>
+  </div>
+
+</div>
+
+<!-- Cargando -->
+<div class="detalle-cargando" *ngIf="cargando">
+  <p>Cargando recurso...</p>
+</div>
+
+<!-- No encontrado -->
+<div class="detalle-no-encontrado" *ngIf="!cargando && !recurso">
+  <p>Recurso no encontrado.</p>
+  <a routerLink="/recursos" class="btn-volver">← Volver a recursos</a>
+</div>
