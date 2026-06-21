@@ -18,6 +18,7 @@
           "options": {
             "outputPath": ".",
             "browser": "src/main.ts",
+            "outputPath": "dist/web-psicologa",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
