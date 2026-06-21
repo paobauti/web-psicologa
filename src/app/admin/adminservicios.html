@@ -1,0 +1,98 @@
+<div class="admin-servicios">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>Servicios</h1>
+      <p>Edita la información de los servicios que ofreces</p>
+    </div>
+    <button class="btn-primario" (click)="abrirModalNuevo()">Agregar Servicio</button>
+  </div>
+
+  <!-- Estado de carga -->
+  <div *ngIf="cargando" class="estado-info">Cargando servicios...</div>
+  <div *ngIf="error" class="estado-error">{{ error }}</div>
+
+  <!-- Vacío -->
+  <div *ngIf="!cargando && !error && servicios.length === 0" class="estado-vacio">
+    Aún no tienes servicios. Agrega el primero con el botón de arriba.
+  </div>
+
+  <!-- Lista de servicios -->
+  <div class="lista-servicios" *ngIf="!cargando && servicios.length > 0">
+    <div class="servicio-card" *ngFor="let servicio of servicios">
+
+      <div class="servicio-info">
+        <h2>{{ servicio.nombre }}</h2>
+        <p>{{ servicio.descripcion }}</p>
+      </div>
+
+      <div class="servicio-acciones">
+        <button class="icono-btn" title="Editar" (click)="abrirModalEditar(servicio)">✎</button>
+        <button class="icono-btn icono-eliminar" title="Eliminar" (click)="confirmarEliminar(servicio)">🗑</button>
+
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="servicio.activo"
+            (change)="toggleActivo(servicio)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───────────── MODAL: Crear / Editar ───────────── -->
+  <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+
+      <h2>{{ modoEdicion ? 'Editar Servicio' : 'Nuevo Servicio' }}</h2>
+
+      <label class="campo">
+        <span>Nombre del servicio</span>
+        <input
+          type="text"
+          [(ngModel)]="servicioSeleccionado.nombre"
+          placeholder="Ej. Terapia Individual">
+      </label>
+
+      <label class="campo">
+        <span>Descripción</span>
+        <textarea
+          rows="4"
+          [(ngModel)]="servicioSeleccionado.descripcion"
+          placeholder="Describe brevemente en qué consiste este servicio"></textarea>
+      </label>
+
+      <label class="campo campo-toggle">
+        <span>Servicio activo (visible en la página)</span>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="servicioSeleccionado.activo">
+          <span class="toggle-slider"></span>
+        </label>
+      </label>
+
+      <div class="modal-acciones">
+        <button class="btn-secundario" (click)="cerrarModal()" [disabled]="guardando">Cancelar</button>
+        <button class="btn-primario" (click)="guardarServicio()" [disabled]="guardando">
+          {{ guardando ? 'Guardando...' : 'Guardar Servicio' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───────────── MODAL: Confirmar eliminar ───────────── -->
+  <div class="modal-overlay" *ngIf="mostrarConfirmar" (click)="cancelarEliminar()">
+    <div class="modal-contenido modal-pequeno" (click)="$event.stopPropagation()">
+      <h2>¿Eliminar este servicio?</h2>
+      <p>Se eliminará "{{ servicioAEliminar?.nombre }}" permanentemente. Esta acción no se puede deshacer.</p>
+      <div class="modal-acciones">
+        <button class="btn-secundario" (click)="cancelarEliminar()">Cancelar</button>
+        <button class="btn-eliminar" (click)="eliminarServicio()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+</div>

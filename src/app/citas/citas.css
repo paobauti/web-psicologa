@@ -143,3 +143,98 @@
 :host ::ng-deep .fc-daygrid-day.fc-day-today {
   background-color: #fdf0eb !important;
 }
+/* ========================================== */
+/* 👑 ESTILOS EXCLUSIVOS PARA ADMINISTRADOR   */
+/* ========================================== */
+
+.admin-citas {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Calendario a la izquierda, panel a la derecha */
+  gap: 24px;
+  align-items: start;
+}
+
+.panel-citas {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.panel-citas h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+.sin-citas {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 30px 0;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.cita-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cita-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.cita-info p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.estado-badge {
+  background: #e2e8f0;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.select-estado {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  font-weight: 500;
+}
+
+.select-estado:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Responsividad: Si se ve en celular o tablet, poner el panel debajo del calendario */
+@media (max-width: 960px) {
+  .admin-citas {
+    grid-template-columns: 1fr;
+  }
+}
