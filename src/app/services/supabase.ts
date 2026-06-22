@@ -178,4 +178,42 @@ async verificarDisponibilidad(fecha: string, hora: string): Promise<boolean> {
   return !error && (data?.length === 0);
 }
 
+async getSession() {
+  const { data, error } = await this.supabase.auth.getSession();
+  return data.session;
+}
+async sincronizarUsuario() {
+  const { data: authData } = await this.supabase.auth.getUser();
+  const user = authData.user;
+  if (!user) return;
+
+  // Primero intenta actualizar por email si ya existe
+  const { data: existente } = await this.supabase
+    .from('usuarios')
+    .select('id')
+    .eq('email', user.email)
+    .maybeSingle(); // 👈 no lanza error si no encuentra
+
+  if (existente) {
+    // Actualiza el id para sincronizar con auth
+    await this.supabase
+      .from('usuarios')
+      .update({ id: user.id, nombre: user.user_metadata?.['nombre'] || '', telefono: user.user_metadata?.['telefono'] || '' })
+      .eq('email', user.email);
+  } else {
+    await this.supabase.from('usuarios').insert([{
+      id: user.id,
+      nombre: user.user_metadata?.['nombre'] || '',
+      email: user.email,
+      telefono: user.user_metadata?.['telefono'] || ''
+    }]);
+  }
+}
+async cancelarCita(citaId: string) {
+  const { data, error } = await this.supabase
+    .from('citas')
+    .update({ estado: 'cancelada' })
+    .eq('id', citaId);
+  return { data, error };
+}
 }

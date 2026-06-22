@@ -1,7 +1,8 @@
 <div class="buscador">
   <div class="buscador-input">
     <span>🔍</span>
-    <input type="text" placeholder="Buscar artículo">
+    <input type="text" placeholder="Buscar artículo" 
+           [(ngModel)]="termino" 
+           (ngModelChange)="onInput()"> <!-- 👈 -->
   </div>
-  <button class="btn-filtrar">FILTRAR</button>
 </div>

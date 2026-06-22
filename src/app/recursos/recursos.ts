@@ -10,4 +10,10 @@ import { RecursosBanner } from './recursos-banner/recursos-banner';
   templateUrl: './recursos.html',
   styleUrl: './recursos.css'
 })
-export class Recursos {}
+export class Recursos {
+  filtro = ''; // 👈
+
+  onBuscar(termino: string) {
+    this.filtro = termino;
+  }
+}

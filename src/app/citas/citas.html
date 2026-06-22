@@ -8,7 +8,26 @@
   <div class="calendario-card">
     <h3>Selecciona una fecha:</h3>
     <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
 
+  <div class="form-card">
+    <h3>Datos Personales</h3>
+    <div class="form-group">
+      <input type="text" placeholder="Nombre y Apellidos" class="form-input" [(ngModel)]="nombre">
+    </div>
+    <div class="form-group">
+      <input type="email" placeholder="Correo Electrónico" class="form-input" [(ngModel)]="email">
+    </div>
+    <div class="form-group">
+      <select class="form-input" [(ngModel)]="tipoSesion">
+        <option value="">Tipo de Sesión</option>
+        <option value="Life Coach">Life Coach</option>
+        <option value="Terapia Individual" disabled>Terapia Individual (Próximamente)</option>
+        <option value="Terapia de Pareja" disabled>Terapia de Pareja (Próximamente)</option>
+        <option value="Terapia Familiar" disabled>Terapia Familiar (Próximamente)</option>
+        <option value="Terapia de Grupo" disabled>Terapia de Grupo (Próximamente)</option>
+      </select>
+    </div>
     <div class="horarios" *ngIf="fechaSeleccionada">
       <h3>Selecciona un horario disponible:</h3>
 
@@ -22,29 +41,6 @@
           [disabled]="estaOcupado(horario.hora)">
           {{ horario.hora | slice:0:5 }}{{ estaOcupado(horario.hora) ? ' — Ocupado' : '' }}
         </option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-card">
-    <h3>Datos Personales</h3>
-    <div class="form-group">
-      <input type="text" placeholder="Nombre y Apellidos" class="form-input" [(ngModel)]="nombre">
-    </div>
-    <div class="form-group">
-      <input type="email" placeholder="Correo Electrónico" class="form-input" [(ngModel)]="email">
-    </div>
-    <div class="form-group">
-      <input type="tel" placeholder="Teléfono / WhatsApp" class="form-input" [(ngModel)]="telefono">
-    </div>
-    <div class="form-group">
-      <select class="form-input" [(ngModel)]="tipoSesion">
-        <option value="">Tipo de Sesión</option>
-        <option value="Life Coach">Life Coach</option>
-        <option value="Terapia Individual" disabled>Terapia Individual (Próximamente)</option>
-        <option value="Terapia de Pareja" disabled>Terapia de Pareja (Próximamente)</option>
-        <option value="Terapia Familiar" disabled>Terapia Familiar (Próximamente)</option>
-        <option value="Terapia de Grupo" disabled>Terapia de Grupo (Próximamente)</option>
       </select>
     </div>
     <div class="form-group">

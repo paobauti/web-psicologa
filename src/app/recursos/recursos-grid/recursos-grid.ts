@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NgFor, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../services/supabase';
@@ -10,14 +10,30 @@ import { SupabaseService } from '../../services/supabase';
   styleUrl: './recursos-grid.css'
 })
 export class RecursosGrid implements OnInit {
-  recursos: any[] = [];
+  @Input() filtro = ''; // 👈
 
-  constructor(private supabase: SupabaseService) {}
+  todosLosRecursos: any[] = [];
+
+  get recursos() { // 👈 filtra en tiempo real
+    if (!this.filtro.trim()) return this.todosLosRecursos;
+    const term = this.filtro.toLowerCase();
+    return this.todosLosRecursos.filter(r =>
+      r.titulo?.toLowerCase().includes(term) ||
+      r.descripcion?.toLowerCase().includes(term) ||
+      r.categoria?.toLowerCase().includes(term)
+    );
+  }
+
+  constructor(
+    private supabase: SupabaseService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   async ngOnInit() {
-    const { data, error } = await this.supabase.getRecursos();
-    console.log('datos:', data);
-    console.log('error:', error);
-    if (data) this.recursos = data;
+    const { data } = await this.supabase.getRecursos();
+    if (data) {
+      this.todosLosRecursos = [...data];
+      this.cdr.detectChanges();
+    }
   }
 }

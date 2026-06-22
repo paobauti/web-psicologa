@@ -13,11 +13,22 @@
       <div class="citas-lista">
         <div class="cita-card" *ngFor="let cita of citas">
           <div class="cita-info">
-            <p class="cita-tipo">{{ cita.tipo }}</p>
-            <p class="cita-fecha">📅 {{ cita.fecha }} — {{ cita.hora }}</p>
+            <p class="cita-tipo">{{ cita.tipo_sesion }}</p>
+            <p class="cita-fecha">📅 {{ cita.fecha }} — {{ cita.hora | slice:0:5 }}</p>
             <p class="cita-temas">{{ cita.temas }}</p>
+            <p class="aviso-cancelar" *ngIf="cita.estado === 'pendiente' && !puedeCancelar(cita)">
+              ⚠️ No es posible cancelar con menos de 24 hrs de anticipación
+            </p>
           </div>
-          <span class="cita-estado" [class]="cita.estado">{{ cita.estado }}</span>
+          <div class="cita-acciones">
+            <span class="cita-estado" [ngClass]="cita.estado">{{ cita.estado }}</span>
+            <button
+              class="btn-cancelar"
+              *ngIf="puedeCancelar(cita)"
+              (click)="cancelarCita(cita.id)">
+              Cancelar
+            </button>
+          </div>
         </div>
         <div class="empty" *ngIf="citas.length === 0">
           <p>No tienes citas agendadas</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -19,7 +19,6 @@ export class Citas implements OnInit {
   horarioSeleccionado = '';
   horarios: any[] = [];
   horariosOcupados: string[] = [];
-  calendarEvents: any[] = [];
   nombre = '';
   email = '';
   telefono = '';
@@ -40,50 +39,50 @@ export class Citas implements OnInit {
     },
     selectable: true,
     events: [],
+    
     dateClick: (info) => {
-      this.fechaSeleccionada = info.dateStr;
-      this.horarioSeleccionado = '';
-      this.cdr.detectChanges();
-      console.log('Fecha seleccionada:', this.fechaSeleccionada);
-      this.cargarHorariosOcupados(info.dateStr);
-    }
+  this.ngZone.run(() => {
+    this.fechaSeleccionada = info.dateStr;
+    this.horarioSeleccionado = '';
+    this.horariosOcupados = [];
+    this.resaltarFecha(info.dateStr); // 👈
+    this.cargarHorariosOcupados(info.dateStr);
+  });
+}
   };
 
-  constructor(private supabase: SupabaseService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private supabase: SupabaseService,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone // 👈 nuevo
+  ) {}
 
   async ngOnInit() {
-    const usuario = await this.supabase.getUsuarioActual();
-    if (usuario) {
-      this.email = usuario.email || '';
-      this.nombre = usuario.user_metadata?.['nombre'] || '';
+    await this.supabase.sincronizarUsuario();
+    const session = await this.supabase.getSession();
+    if (session) {
+      this.email = session.user.email || '';
+      this.nombre = session.user.user_metadata?.['nombre'] || '';
     }
-    const { data, error } = await this.supabase.getHorarios();
-    console.log('Horarios:', data, 'Error:', error);
+    const { data } = await this.supabase.getHorarios();
     if (data) this.horarios = data;
   }
 
   async cargarHorariosOcupados(fecha: string) {
     this.cargandoHorarios = true;
-    this.cdr.detectChanges();
     try {
       const { data } = await this.supabase.getHorariosOcupados(fecha);
       this.horariosOcupados = data?.map((c: any) => c.hora) || [];
-      console.log('Horarios ocupados:', this.horariosOcupados);
     } catch (e) {
       this.horariosOcupados = [];
     } finally {
       this.cargandoHorarios = false;
-      this.cdr.detectChanges();
     }
   }
 
   estaOcupado(hora: string): boolean {
     const horaCorta = hora.substring(0, 5);
     return this.horariosOcupados.some(h => h.substring(0, 5) === horaCorta);
-  }
-
-  seleccionarHorario(hora: string) {
-    this.horarioSeleccionado = hora;
   }
 
   async agendarCita() {
@@ -106,10 +105,10 @@ export class Citas implements OnInit {
       return;
     }
 
-    const usuario = await this.supabase.getUsuarioActual();
+    const session = await this.supabase.getSession();
 
     const cita = {
-      usuario_id: usuario?.id || null,
+      usuario_id: session?.user.id || null,
       fecha: this.fechaSeleccionada,
       hora: this.horarioSeleccionado,
       tipo_sesion: this.tipoSesion,
@@ -120,7 +119,13 @@ export class Citas implements OnInit {
     const { error } = await this.supabase.agendarCita(cita);
 
     if (error) {
-      this.errorMsg = 'Error al agendar la cita. Intenta de nuevo.';
+      if (error.code === '23505') {
+        this.errorMsg = 'Ya tienes una cita en ese horario. Por favor elige otro.';
+        await this.cargarHorariosOcupados(this.fechaSeleccionada);
+      } else {
+        this.errorMsg = 'Error al agendar la cita. Intenta de nuevo.';
+        console.error('Error al agendar:', error);
+      }
     } else {
       this.exitoMsg = '¡Cita agendada correctamente! Daisy se pondrá en contacto contigo.';
       setTimeout(() => { this.exitoMsg = ''; }, 5000);
@@ -129,7 +134,18 @@ export class Citas implements OnInit {
       this.horariosOcupados = [];
       this.tipoSesion = '';
       this.temas = '';
-      this.cdr.detectChanges();
     }
   }
+  resaltarFecha(dateStr: string) {
+  // Quita highlight anterior
+  document.querySelectorAll('.dia-seleccionado').forEach(el => {
+    el.classList.remove('dia-seleccionado');
+  });
+
+  // Agrega highlight a la fecha clickeada
+  const celda = document.querySelector(`[data-date="${dateStr}"]`);
+  if (celda) {
+    celda.classList.add('dia-seleccionado');
+  }
+}
 }

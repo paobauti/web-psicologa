@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // 👈 agrega ActivatedRoute
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService } from '../services/supabase';
+
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,17 @@ export class Login {
   errorMsg = '';
   cargando = false;
 
-  constructor(private router: Router, private supabase: SupabaseService) {}
+  constructor(
+    private router: Router,
+    private supabase: SupabaseService,
+    private route: ActivatedRoute // 👈 nuevo
+  ) {}
+
+  // 👈 método auxiliar para redirigir
+  private redirigirTrasLogin() {
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/perfil';
+    this.router.navigateByUrl(returnUrl);
+  }
 
   async login() {
     if (!this.email || !this.password) {
@@ -35,7 +46,7 @@ export class Login {
       localStorage.setItem('usuarioNombre', data.user?.user_metadata?.['nombre'] || this.email);
       localStorage.setItem('usuarioId', data.user?.id || '');
       localStorage.setItem('usuarioEmail', this.email);
-      this.router.navigate(['/perfil']);
+      this.redirigirTrasLogin(); // 👈 reemplaza this.router.navigate(['/perfil'])
     }
   }
 
@@ -53,7 +64,7 @@ export class Login {
       localStorage.setItem('usuarioNombre', this.nombre);
       localStorage.setItem('usuarioId', data.user?.id || '');
       localStorage.setItem('usuarioEmail', this.email);
-      this.router.navigate(['/perfil']);
+      this.redirigirTrasLogin(); // 👈 reemplaza this.router.navigate(['/perfil'])
     }
   }
 }
