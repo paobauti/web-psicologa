@@ -15,12 +15,14 @@ import { NuevosEspacios } from './servicios/nuevos-espacios/nuevos-espacios';
   styleUrl: './app.css'
 })
 export class App {
-  isHome = true;
+   isHome = true;
+   isAdmin = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isHome = event.urlAfterRedirects === '/';
+      this.isHome = event.urlAfterRedirects === '/';
+      this.isAdmin = event.urlAfterRedirects.startsWith('/admin');
       }
     });
   }

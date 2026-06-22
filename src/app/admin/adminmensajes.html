@@ -1,0 +1,94 @@
+<div class="admin-mensajes">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>Mensajes</h1>
+      <p>
+        Gestiona los mensajes de tus pacientes
+        <span class="badge-no-leidos" *ngIf="noLeidos > 0">{{ noLeidos }} sin leer</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Estados -->
+  <div *ngIf="cargando" class="estado-info">Cargando mensajes...</div>
+  <div *ngIf="error" class="estado-error">{{ error }}</div>
+  <div *ngIf="!cargando && !error && mensajes.length === 0" class="estado-vacio">
+    No tienes mensajes todavía.
+  </div>
+
+  <!-- Layout bandeja: lista + detalle -->
+  <div class="bandeja" *ngIf="!cargando && mensajes.length > 0">
+
+    <!-- Lista de mensajes -->
+    <div class="lista-mensajes">
+      <div
+        class="mensaje-card"
+        *ngFor="let m of mensajes"
+        [class.no-leido]="!m.leido"
+        [class.activo]="mensajeSeleccionado?.id === m.id"
+        (click)="abrirMensaje(m)">
+
+        <div class="mensaje-card-top">
+          <span class="remitente">{{ m.usuarios?.nombre || 'Usuario desconocido' }}</span>
+          <span class="punto-no-leido" *ngIf="!m.leido"></span>
+        </div>
+        <p class="preview">{{ m.mensaje }}</p>
+        <span class="fecha">{{ m.created_at | date:'d MMM, h:mm a' }}</span>
+      </div>
+    </div>
+
+    <!-- Detalle del mensaje -->
+    <div class="detalle-mensaje" *ngIf="mensajeSeleccionado">
+      <div class="detalle-header">
+        <div>
+          <h2>{{ mensajeSeleccionado.usuarios?.nombre || 'Usuario desconocido' }}</h2>
+          <p class="contacto">
+            {{ mensajeSeleccionado.usuarios?.email }}
+            <span *ngIf="mensajeSeleccionado.usuarios?.telefono"> · {{ mensajeSeleccionado.usuarios?.telefono }}</span>
+          </p>
+        </div>
+        <button class="icono-btn icono-eliminar" title="Eliminar" (click)="confirmarEliminar(mensajeSeleccionado)">🗑</button>
+      </div>
+
+      <div class="burbuja-mensaje">
+        <p>{{ mensajeSeleccionado.mensaje }}</p>
+        <span class="fecha-burbuja">{{ mensajeSeleccionado.created_at | date:'d MMM yyyy, h:mm a' }}</span>
+      </div>
+
+      <div class="caja-respuesta">
+        <label>Tu respuesta</label>
+        <textarea
+          rows="4"
+          [(ngModel)]="textoRespuesta"
+          placeholder="Escribe una respuesta para este paciente..."></textarea>
+        <button
+          class="btn-primario"
+          (click)="enviarRespuesta()"
+          [disabled]="enviandoRespuesta || !textoRespuesta.trim()">
+          {{ enviandoRespuesta ? 'Enviando...' : 'Enviar Respuesta' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Estado vacío del detalle -->
+    <div class="detalle-vacio" *ngIf="!mensajeSeleccionado">
+      Selecciona un mensaje para verlo aquí.
+    </div>
+
+  </div>
+
+  <!-- Modal: confirmar eliminar -->
+  <div class="modal-overlay" *ngIf="mostrarConfirmar" (click)="cancelarEliminar()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+      <h2>¿Eliminar este mensaje?</h2>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-acciones">
+        <button class="btn-secundario" (click)="cancelarEliminar()">Cancelar</button>
+        <button class="btn-eliminar" (click)="eliminarMensaje()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
