@@ -248,3 +248,106 @@
   color: white !important;
   font-weight: bold;
 }
+/* ─── Modales cita ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 43, 31, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(3px);
+}
+
+.modal-cita {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(100, 50, 30, 0.15);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-icono {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+
+.modal-icono svg {
+  width: 28px;
+  height: 28px;
+}
+
+.modal-icono.exito {
+  background: #d4edda;
+  color: #2e7d32;
+}
+
+.modal-icono.error {
+  background: #fdecea;
+  color: #c62828;
+}
+
+.modal-cita h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #3d2b1f;
+  margin: 0 0 0.5rem;
+}
+
+.modal-cita p {
+  font-size: 0.9rem;
+  color: #9e7e6e;
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-cita-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.btn-modal-principal {
+  background: #d4846a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s;
+}
+
+.btn-modal-principal:hover { background: #c27259; }
+
+.btn-modal-secundario {
+  background: #fff;
+  color: #9e7e6e;
+  border: 1.5px solid #e8d5c8;
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.btn-modal-secundario:hover { border-color: #d4846a; }

@@ -1,12 +1,12 @@
-<div class="life-coach">
+<div class="life-coach" *ngIf="servicio">
   <span class="badge">DISPONIBLE</span>
   <div class="life-coach-content">
     <div class="life-coach-image">
-      <img src="https://nxgkvvykypfntdmgwhsl.supabase.co/storage/v1/object/sign/Imagenes/img_lifecoach.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV80NjdlNGRiNS03MjFhLTRjZDgtYWM1Ny0wNjE0ZDI0YzQzNjEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJJbWFnZW5lcy9pbWdfbGlmZWNvYWNoLnBuZyIsImlhdCI6MTc4MDQ0MTk1NCwiZXhwIjoxODExOTc3OTU0fQ.jM38lsfumxeVSN7zs1VhdWRyeLevtRaHdPPxhsMy24s" alt="Life Coach">
+      <img [src]="servicio.imagen_url" alt="Life Coach">
     </div>
     <div class="life-coach-info">
-      <h2><i class="fa-solid fa-leaf"></i> Life Coach</h2>
-      <p>Acompañamiento enfocado en metas personales, propósito de vida, crecimiento emocional y desarrollo integral desde una perspectiva humana y espiritual.</p>
+      <h2><i class="fa-solid fa-leaf"></i> {{ servicio.nombre }}</h2>
+      <p>{{ servicio.descripcion }}</p>
       <div class="life-coach-features">
         <div class="feature">
           <i class="fa-solid fa-bullseye"></i>
@@ -21,32 +21,32 @@
           <p>Crecimiento personal y bienestar</p>
         </div>
       </div>
-      <p class="modalidad"><i class="fa-regular fa-circle-check"></i> Modalidad: Vía Telehealth</p>
+      <p class="modalidad"><i class="fa-regular fa-circle-check"></i> Modalidad: {{ servicio.modalidad }}</p>
     </div>
     <div class="life-coach-details">
       <div class="detail-item">
         <i class="fa-regular fa-clock"></i>
         <div>
           <p class="detail-title">Sesiones</p>
-          <p>60 minutos</p>
+          <p>{{ servicio.duracion }}</p>
         </div>
       </div>
       <div class="detail-item">
         <i class="fa-regular fa-calendar"></i>
         <div>
           <p class="detail-title">Frecuencia</p>
-          <p>Personalizada</p>
+          <p>{{ servicio.frecuencia }}</p>
         </div>
       </div>
       <div class="detail-item">
         <i class="fa-regular fa-user"></i>
         <div>
           <p class="detail-title">Acompañamiento</p>
-          <p>1 a 1</p>
+          <p>{{ servicio.acompanamiento }}</p>
         </div>
       </div>
       <div class="life-coach-buttons">
-       <button class="btn-primary" routerLink="/citas">
+        <button class="btn-primary" routerLink="/citas">
           <i class="fa-regular fa-calendar"></i> Agendar Cita
         </button>
       </div>

@@ -46,8 +46,43 @@
     <div class="form-group">
       <textarea placeholder="Temas a tratar..." class="form-textarea" [(ngModel)]="temas"></textarea>
     </div>
-    <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
-    <p class="exito-msg" *ngIf="exitoMsg">{{ exitoMsg }}</p>
     <button class="btn-agendar" (click)="agendarCita()">Agendar Cita</button>
+  </div>
+</div>
+
+<!-- ─── MODAL ÉXITO ─── -->
+<div class="modal-overlay" *ngIf="exitoMsg" (click)="cerrarExito()">
+  <div class="modal-cita" (click)="$event.stopPropagation()">
+    <div class="modal-icono exito">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+    <h2>¡Cita agendada!</h2>
+    <p>Tu cita ha sido registrada correctamente. Te esperamos.</p>
+    <div class="modal-cita-footer">
+      <button class="btn-modal-secundario" (click)="cerrarExito()">Cerrar</button>
+      <a class="btn-modal-principal" routerLink="/perfil">Ver mis citas</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MODAL ERROR ─── -->
+<div class="modal-overlay" *ngIf="errorMsg" (click)="cerrarError()">
+  <div class="modal-cita" (click)="$event.stopPropagation()">
+    <div class="modal-icono error">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <h2>Algo salió mal</h2>
+    <p>{{ errorMsg }}</p>
+    <div class="modal-cita-footer">
+      <button class="btn-modal-principal" (click)="cerrarError()">Intentar de nuevo</button>
+    </div>
   </div>
 </div>

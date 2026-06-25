@@ -1,30 +1,23 @@
 <section class="nuevos-espacios">
-  <p class="soon">✦ MÁS PRONTO ✦</p>
-  <h2>Nuevos Espacios de Acompañamiento</h2>
-  <div class="espacios-grid">
-    <div class="espacio-card">
-      <i class="fa-solid fa-user"></i>
-      <h3>Terapia Individual</h3>
-      <p>Acompañamiento personalizado para trabajar emociones, sanar heridas y fortalecer tu bienestar emocional.</p>
-      <button class="btn-soon">🔒 Próximamente</button>
-    </div>
-    <div class="espacio-card">
-      <i class="fa-solid fa-heart"></i>
-      <h3>Terapia de Pareja</h3>
-      <p>Fortalecemos la comunicación, la confianza y la conexión para construir relaciones sanas y duraderas.</p>
-      <button class="btn-soon">🔒 Próximamente</button>
-    </div>
-    <div class="espacio-card">
-      <i class="fa-solid fa-house"></i>
-      <h3>Terapia Familiar</h3>
-      <p>Acompañamiento para fortalecer la comunicación familiar, resolver conflictos y construir relaciones más sanas.</p>
-      <button class="btn-soon">🔒 Próximamente</button>
-    </div>
-    <div class="espacio-card">
-      <i class="fa-solid fa-people-group"></i>
-      <h3>Terapia de Grupo</h3>
-      <p>Espacios grupales con diferentes temáticas para aprender, compartir y crecer junto a otros en comunidad.</p>
-      <button class="btn-soon">🔒 Próximamente</button>
+
+  <!-- Servicios activos — reutiliza el componente life-coach -->
+  <app-life-coach 
+    *ngFor="let servicio of serviciosActivos" 
+    [servicioInput]="servicio">
+  </app-life-coach>
+
+  <!-- Servicios próximamente -->
+  <div *ngIf="serviciosProximos.length > 0">
+    <p class="soon">✦ MÁS PRONTO ✦</p>
+    <h2>Nuevos Espacios de Acompañamiento</h2>
+    <div class="espacios-grid">
+      <div class="espacio-card" *ngFor="let servicio of serviciosProximos">
+        <i [class]="getIcono(servicio.nombre)"></i>
+        <h3>{{ servicio.nombre }}</h3>
+        <p>{{ servicio.descripcion }}</p>
+        <button class="btn-soon">🔒 Próximamente</button>
+      </div>
     </div>
   </div>
+
 </section>

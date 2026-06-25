@@ -216,4 +216,11 @@ async cancelarCita(citaId: string) {
     .eq('id', citaId);
   return { data, error };
 }
+async getTodosServicios() {
+  const { data, error } = await this.supabase
+    .from('servicios')
+    .select('*')
+    .order('created_at', { ascending: true });
+  return { data, error };
+}
 }
